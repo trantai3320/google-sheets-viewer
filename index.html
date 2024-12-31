@@ -43,7 +43,6 @@
         th, td {
             border: 1px solid #ddd;
             padding: 12px; /* Khoảng cách bên trong ô */
-            text-align: center; /* Căn giữa dữ liệu */
             font-size: 14px;
         }
 
@@ -65,9 +64,16 @@
             background-color: #d7eaff; /* Xanh nhạt khi rê chuột */
         }
 
-        /* Căn chỉnh dữ liệu số */
-        td:nth-child(n+4) {
-            text-align: right; /* Căn phải với dữ liệu số */
+        /* Căn chỉnh cột text */
+        td:first-child, td:nth-child(3), td:nth-child(4) {
+            text-align: left; /* Căn trái cho text */
+            font-weight: bold; /* In đậm */
+            color: #333; /* Màu chữ rõ ràng */
+        }
+
+        /* Căn chỉnh số liệu */
+        td:nth-child(n+5) {
+            text-align: right; /* Căn phải cho dữ liệu số */
         }
 
         footer {
@@ -89,7 +95,7 @@
         // Thông tin API và Sheet
         const API_KEY = 'AIzaSyBzkCyFPR1PwKxXXIK0s8aJiAIMNCctiSw';
         const SHEET_ID = '16XYmvn3kq-fVr5mCQytiK6qc9iGWnZ73JP2HlJPM0vs';
-        const RANGE = 'sheet1'; // Tên sheet hoặc phạm vi trong Google Sheets
+        const RANGE = 'sheet1'; // Chuyển về sheet1
 
         // Hàm tải dữ liệu từ Google Sheets
         async function fetchData() {
@@ -125,9 +131,18 @@
             // Render các dòng dữ liệu
             data.slice(1).forEach(row => {
                 const tr = document.createElement('tr');
-                row.forEach(cell => {
+                row.forEach((cell, colIndex) => {
                     const td = document.createElement('td');
-                    td.textContent = cell || ''; // Xử lý ô trống
+
+                    // Xử lý căn chỉnh cột "Gói mua" (cột 3)
+                    if (colIndex === 3) {
+                        td.textContent = cell || ''; // Đảm bảo text hiển thị đúng
+                        td.style.textAlign = "left"; // Căn trái
+                        td.style.fontWeight = "bold"; // In đậm
+                    } else {
+                        td.textContent = cell || ''; // Xử lý ô trống
+                    }
+
                     tr.appendChild(td);
                 });
                 tbody.appendChild(tr);
@@ -147,7 +162,7 @@
         <h1>Google Sheets Web Viewer</h1>
     </header>
     <div class="container">
-        <p>Đã tải xong dữ liệu từ Google Sheets... Cảm ơn bạn đã ủng hộ sản phẩm của mình.</p>
+        <p>Đã tải xong dữ liệu... Cảm ơn bạn đã ủng hộ sản phẩm của mình.</p>
     </div>
     <footer>
         <p>&copy; 2024 Google Sheets Viewer</p>
