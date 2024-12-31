@@ -64,9 +64,12 @@
             background-color: #d7eaff; /* Xanh nhạt khi rê chuột */
         }
 
-        /* Căn chỉnh cột text */
-        td:first-child, td:nth-child(3), td:nth-child(4) {
-            text-align: left; /* Căn trái cho text */
+        /* Căn chỉnh cột text và in đậm các cột được yêu cầu */
+        td:nth-child(2), /* ID */
+        td:nth-child(3), /* Pass */
+        td:nth-child(4), /* Gói mua */
+        td:nth-child(9), /* Số ngày còn lại */
+        td:nth-child(11) /* Tổng hoàn */ {
             font-weight: bold; /* In đậm */
             color: #333; /* Màu chữ rõ ràng */
         }
@@ -134,11 +137,11 @@
                 row.forEach((cell, colIndex) => {
                     const td = document.createElement('td');
 
-                    // Xử lý căn chỉnh cột "Gói mua" (cột 3)
-                    if (colIndex === 3) {
-                        td.textContent = cell || ''; // Đảm bảo text hiển thị đúng
-                        td.style.textAlign = "left"; // Căn trái
-                        td.style.fontWeight = "bold"; // In đậm
+                    // In đậm các cột ID, Pass, Gói mua, Số ngày còn lại, Tổng hoàn
+                    if ([1, 2, 3, 8, 10].includes(colIndex)) {
+                        td.textContent = cell || '';
+                        td.style.fontWeight = "bold";
+                        td.style.textAlign = colIndex >= 8 ? "right" : "left"; // Căn phải cho số liệu
                     } else {
                         td.textContent = cell || ''; // Xử lý ô trống
                     }
@@ -165,7 +168,7 @@
         <p>Đã tải xong dữ liệu... Cảm ơn bạn đã ủng hộ sản phẩm của mình.</p>
     </div>
     <footer>
-        <p>&copy; 2024 Google Sheets Viewer</p>
+        <p>&copy; Google Sheets Viewer - Roboticvn</p>
     </footer>
 </body>
 </html>
