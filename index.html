@@ -3,24 +3,75 @@
 <head>
     <title>Google Sheets Web Viewer</title>
     <style>
+        /* Định nghĩa phong cách toàn cục */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaf4fc; /* Xanh nhạt làm nền */
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF; /* Xanh nước biển đậm */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
             margin-top: 20px;
+            background-color: white;
         }
+
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 10px;
+            text-align: left;
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #007BFF; /* Xanh nước biển đậm */
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #eaf4fc; /* Xanh nhạt cho dòng xen kẽ */
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            background: #007BFF;
+            color: white;
         }
     </style>
     <script>
         // Thông tin API và Sheet
         const API_KEY = 'AIzaSyBzkCyFPR1PwKxXXIK0s8aJiAIMNCctiSw';
         const SHEET_ID = '16XYmvn3kq-fVr5mCQytiK6qc9iGWnZ73JP2HlJPM0vs';
-        const RANGE = 'sheet2'; // Tên sheet hoặc phạm vi trong Google Sheets
+        const RANGE = 'sheet1'; // Tên sheet hoặc phạm vi trong Google Sheets
 
         // Hàm tải dữ liệu từ Google Sheets
         async function fetchData() {
@@ -34,7 +85,7 @@
                 renderTable(data.values);
             } catch (error) {
                 console.error('Fetch error:', error);
-                document.body.innerHTML = `<h3 style="color: red;">Error fetching data: ${error.message}</h3>`;
+                document.querySelector('.container').innerHTML = `<h3 style="color: red;">Error fetching data: ${error.message}</h3>`;
             }
         }
 
@@ -66,7 +117,7 @@
 
             table.appendChild(thead);
             table.appendChild(tbody);
-            document.body.appendChild(table);
+            document.querySelector('.container').appendChild(table);
         }
 
         // Tải dữ liệu khi trang được tải
@@ -74,6 +125,14 @@
     </script>
 </head>
 <body>
-    <h1>Check Refund Web Viewer </h1>
+    <header>
+        <h1>Google Sheets Web Viewer</h1>
+    </header>
+    <div class="container">
+        <p>Đang tải dữ liệu từ Google Sheets... Xin chờ giây lát.</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 Google Sheets Viewer</p>
+    </footer>
 </body>
 </html>
