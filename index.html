@@ -3,12 +3,12 @@
 <head>
     <title>Google Sheets Web Viewer</title>
     <style>
-        /* Định nghĩa phong cách toàn cục */
+        /* Toàn bộ trang */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #eaf4fc; /* Xanh nhạt làm nền */
+            background-color: #f0f8ff; /* Xanh nhạt */
             color: #333;
         }
 
@@ -25,7 +25,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px; /* Giới hạn chiều rộng bảng */
             margin: 30px auto;
             background: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -35,28 +35,39 @@
 
         table {
             border-collapse: collapse;
-            width: 100%;
+            width: 100%; /* Chiều rộng bảng */
             margin-top: 20px;
             background-color: white;
         }
 
         th, td {
             border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
+            padding: 12px; /* Khoảng cách bên trong ô */
+            text-align: center; /* Căn giữa dữ liệu */
+            font-size: 14px;
         }
 
         th {
             background-color: #007BFF; /* Xanh nước biển đậm */
             color: white;
+            text-transform: uppercase; /* Viết hoa tiêu đề */
         }
 
         td {
-            background-color: #f9f9f9;
+            background-color: #f9f9f9; /* Màu xám nhạt */
         }
 
         tr:nth-child(even) td {
             background-color: #eaf4fc; /* Xanh nhạt cho dòng xen kẽ */
+        }
+
+        tr:hover td {
+            background-color: #d7eaff; /* Xanh nhạt khi rê chuột */
+        }
+
+        /* Căn chỉnh dữ liệu số */
+        td:nth-child(n+4) {
+            text-align: right; /* Căn phải với dữ liệu số */
         }
 
         footer {
@@ -66,12 +77,19 @@
             background: #007BFF;
             color: white;
         }
+
+        /* Tăng khoảng cách giữa bảng và nội dung khác */
+        .container p {
+            text-align: center;
+            font-size: 16px;
+            color: #555;
+        }
     </style>
     <script>
         // Thông tin API và Sheet
         const API_KEY = 'AIzaSyBzkCyFPR1PwKxXXIK0s8aJiAIMNCctiSw';
         const SHEET_ID = '16XYmvn3kq-fVr5mCQytiK6qc9iGWnZ73JP2HlJPM0vs';
-        const RANGE = 'sheet1'; // Tên sheet hoặc phạm vi trong Google Sheets
+        const RANGE = 'sheet2'; // Tên sheet hoặc phạm vi trong Google Sheets
 
         // Hàm tải dữ liệu từ Google Sheets
         async function fetchData() {
@@ -128,9 +146,6 @@
     <header>
         <h1>Google Sheets Web Viewer</h1>
     </header>
-    <div class="container">
-        <p>Đang tải dữ liệu từ Google Sheets... Xin chờ giây lát.</p>
-    </div>
     <footer>
         <p>&copy; 2024 Google Sheets Viewer</p>
     </footer>
